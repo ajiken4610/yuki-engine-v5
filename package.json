@@ -1,0 +1,20 @@
+{
+  "name": "nuxt-app",
+  "private": true,
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare"
+  },
+  "devDependencies": {
+    "@prettier/plugin-pug": "^2.4.2",
+    "@types/node": "^18",
+    "@volar/vue-language-plugin-pug": "^1.6.3",
+    "nuxt": "^3.4.3",
+    "prettier": "^2.8.8",
+    "pug": "^3.0.2",
+    "sass": "^1.62.1"
+  }
+}
