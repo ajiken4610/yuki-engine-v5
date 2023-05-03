@@ -19,8 +19,10 @@ onMounted(() => {
     scene.activeCamera = camera;
     camera.attachControl(canvas)
     scene.lights.forEach((light) => {
+      light.intensity *= .1
       const shadowGenerator = new ShadowGenerator(1024, light as IShadowLight)
-      shadowGenerator.useBlurExponentialShadowMap = true
+      // shadowGenerator.useBlurExponentialShadowMap = true
+      shadowGenerator.bias = .0001
       shadowGenerator.addShadowCaster(scene.getMeshById("__root__")!, true)
     })
     scene.meshes.forEach((mesh) => {
