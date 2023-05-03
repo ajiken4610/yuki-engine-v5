@@ -10,9 +10,11 @@
   },
   "devDependencies": {
     "@prettier/plugin-pug": "^2.4.2",
+    "@tsconfig/strictest": "^2.0.1",
     "@types/node": "^18",
     "@volar/vue-language-plugin-pug": "^1.6.3",
     "babylonjs": "^6.1.0",
+    "babylonjs-loaders": "^6.1.0",
     "nuxt": "^3.4.3",
     "prettier": "^2.8.8",
     "pug": "^3.0.2",
