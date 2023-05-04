@@ -4,7 +4,7 @@ div
 </template>
 
 <script setup lang="ts">
-import { IShadowLight, SceneLoader, ShadowGenerator } from 'babylonjs'
+import { SceneLoader } from 'babylonjs'
 import modelPath from "assets/test.glb?url"
 import 'babylonjs-loaders';
 // import { MeshBuilder } from 'babylonjs';

@@ -1,12 +1,12 @@
-import { Scene, ShadowGenerator } from "babylonjs";
+import { type IShadowLight, Scene, ShadowGenerator } from "babylonjs";
 
 export default (
   scene: Scene,
   keyword: string = "",
   options: {
-    blur: boolean;
-    size: number;
-    fullFloat: boolean;
+    blur?: boolean;
+    size?: number;
+    fullFloat?: boolean;
   } = {}
 ) => {
   scene.lights.forEach((light) => {
