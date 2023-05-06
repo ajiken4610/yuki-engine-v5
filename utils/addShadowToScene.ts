@@ -22,7 +22,7 @@ export default (
     shadowGenerator.useBlurExponentialShadowMap = !!options.blur;
     shadowGenerator.useKernelBlur = true;
     shadowGenerator.blurKernel = 8;
-    shadowGenerator.bias = 0.0001;
+    shadowGenerator.bias = options.blur ? 0.01 : 0.0001;
     scene.meshes.forEach((mesh) => {
       shadowGenerator.addShadowCaster(mesh, false);
     });
