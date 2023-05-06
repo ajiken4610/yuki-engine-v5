@@ -10,7 +10,7 @@ export default (
   } = {}
 ) => {
   scene.lights.forEach((light) => {
-    // light.intensity *= .1
+    light.intensity *= 0.1;
     if (light.name.indexOf(keyword) === -1) {
       return;
     }
