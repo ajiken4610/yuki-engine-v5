@@ -9,6 +9,7 @@ export default (
     fullFloat?: boolean;
   } = {}
 ) => {
+  const generators: ShadowGenerator[] = [];
   scene.lights.forEach((light) => {
     light.intensity *= 0.1;
     if (light.name.indexOf(keyword) === -1) {
@@ -19,6 +20,7 @@ export default (
       light as IShadowLight,
       !!options.fullFloat
     );
+    generators.push(shadowGenerator);
     shadowGenerator.useBlurExponentialShadowMap = !!options.blur;
     shadowGenerator.useKernelBlur = true;
     shadowGenerator.blurKernel = 8;
@@ -28,4 +30,5 @@ export default (
   scene.meshes.forEach((mesh) => {
     mesh.receiveShadows = true;
   });
+  return generators;
 };
