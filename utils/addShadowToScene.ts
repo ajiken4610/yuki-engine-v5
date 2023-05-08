@@ -23,9 +23,7 @@ export default (
     shadowGenerator.useKernelBlur = true;
     shadowGenerator.blurKernel = 8;
     shadowGenerator.bias = options.blur ? 0.01 : 0.0001;
-    scene.meshes.forEach((mesh) => {
-      shadowGenerator.addShadowCaster(mesh, false);
-    });
+    shadowGenerator.getShadowMap()!.renderList = scene.meshes;
   });
   scene.meshes.forEach((mesh) => {
     mesh.receiveShadows = true;
