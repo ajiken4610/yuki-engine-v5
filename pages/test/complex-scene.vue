@@ -25,6 +25,9 @@ onMounted(() => {
     scene.activeCamera = camera;
     camera.attachControl(canvas)
     addShadowToScene(scene, "", { blur: true })
+    scene.lights.forEach((light) => {
+      light.intensity *= .1
+    })
     scene.postProcessRenderPipelineManager.attachCamerasToRenderPipeline("ssao", camera);
     scene.postProcessRenderPipelineManager.attachCamerasToRenderPipeline("ssr", camera);
     engine.runRenderLoop(() => {
