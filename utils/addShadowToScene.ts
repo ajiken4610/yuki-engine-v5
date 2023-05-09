@@ -15,8 +15,6 @@ export default (
     keyword,
     options
   );
-  scene.meshes.forEach((mesh) => {
-    mesh.receiveShadows = true;
-  });
+  addMeshShadow(scene.meshes);
   return generators;
 };
