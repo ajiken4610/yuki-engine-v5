@@ -1,7 +1,7 @@
 export default (src: string) => {
   const ret: { [key: string]: (number | string)[] }[] = [];
   for (const rowString of src.split(",")) {
-    if (!rowString) {
+    if (!rowString.trim()) {
       continue;
     }
     const row: { [key: string]: (number | string)[] } = {};
