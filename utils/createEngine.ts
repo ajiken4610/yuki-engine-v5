@@ -8,5 +8,8 @@ export default async (canvas: HTMLCanvasElement) => {
   } else {
     engine = new Engine(canvas, false);
   }
+  window.addEventListener("resize", () => {
+    engine.resize();
+  });
   return engine;
 };
