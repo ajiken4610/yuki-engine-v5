@@ -12,44 +12,42 @@ export default async (
     const splitedRef = ref.split("@");
     const refName = splitedRef[0]!;
     let fileName = splitedRef[1]!;
+    let loadFileName = fileName;
     let refParent: DynamicStringResource | undefined = undefined;
     if (fileName in memo) {
       refParent = memo[fileName]!;
     } else {
-      if (fileName.matchAll(/^.*\.json$/g)) {
+      if (fileName.match(/^.*\.json$/g)) {
         // jsonファイルの場合
-        const jsonFile = (await import(fileName)) as string[];
-        const parsed: { [key: string]: string }[] = [];
-        for (const fileName of jsonFile) {
-          const elements = fileName.split("_");
-          elements.shift();
-          const child: { [key: string]: string } = {};
-          parsed.push(child);
-          for (const keyValue of elements) {
-            const key0value1 = keyValue.split("-");
-            child[key0value1[0]!] = key0value1[1]!;
-          }
-        }
-        for (var i = 0; parsed.length; i++) {
-          const currentFile = parsed[i]!;
+        const tsFileNames = (await $fetch(fileName)) as string[];
+        for (const tsFileName of tsFileNames) {
+          // ファイル名をパースしつつ、整合性をチェック
+          const splitedTsFileName = tsFileName.split(/_|\./);
+          splitedTsFileName.shift();
+          splitedTsFileName.pop();
           let flag = true;
-          for (const key of Object.keys(currentFile)) {
-            flag &&= globalState[key] === currentFile[key];
+          for (const keyValueFileName of splitedTsFileName) {
+            const keyValue = keyValueFileName.split("-");
+            const key = keyValue[0] || "";
+            const value = keyValue[1] || "";
+            if (globalState[key] !== value) {
+              flag = false;
+              break;
+            }
           }
           if (flag) {
-            refParent = (await import(jsonFile[i]!)) as DynamicStringResource;
+            loadFileName = tsFileName;
+            break;
           }
         }
-        if (!refParent) {
-          return ret;
+        if (loadFileName === fileName) {
+          return "ERR_DYN_STR_NOT_FND: " + fileName;
         }
-      } else if (fileName.matchAll(/^.*\.ts$/g)) {
-        // tsファイルの場合
-        refParent = (await import(fileName)) as DynamicStringResource;
-      } else {
-        // ほかの場合
-        return ret;
       }
+
+      refParent = (await import(/* @vite-ignore */ loadFileName))
+        .default as DynamicStringResource;
+      memo[fileName] = refParent;
     }
     ret = refParent.get(refName, state);
   } catch (e) {
