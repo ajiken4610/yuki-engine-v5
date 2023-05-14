@@ -1,5 +1,12 @@
-import { Engine } from "babylonjs";
+import { Engine, WebGPUEngine } from "babylonjs";
 
-export default (canvas: HTMLCanvasElement) => {
-  return new Engine(canvas, false);
+export default async (canvas: HTMLCanvasElement) => {
+  let engine: Engine;
+  if (await WebGPUEngine.IsSupportedAsync) {
+    engine = new WebGPUEngine(canvas);
+    await (engine as WebGPUEngine).initAsync();
+  } else {
+    engine = new Engine(canvas, false);
+  }
+  return engine;
 };
