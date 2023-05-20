@@ -13,6 +13,7 @@
     "@tsconfig/strictest": "^2.0.1",
     "@types/node": "^18",
     "@volar/vue-language-plugin-pug": "^1.6.3",
+    "@vueuse/core": "^10.1.2",
     "autoprefixer": "^10.4.14",
     "babylonjs": "^6.1.0",
     "babylonjs-loaders": "^6.1.0",
